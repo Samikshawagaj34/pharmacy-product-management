@@ -11,18 +11,20 @@ export default function Login() {
         </div>
 
         {isLogin ? (
-          <div className='login-form'>
+          <div className='form'>
             <h2>Login</h2>
             <input type='text' placeholder='Email' />
             <input type='password' placeholder='Password' />
+            <a href="#">Forgot Password? </a>
             <button className='formBtns'>Login</button>
+            <p>Not a member?<a href="#" onClick={() => setIsLogin(false)}>Signup now</a></p>
           </div>
         ) : (
           <div className='signup-form'>
             <h2>Sign Up</h2>
-            <input type='text' placeholder='Name' />
             <input type='email' placeholder='Email' />
             <input type='password' placeholder='Password' />
+             <input type='password' placeholder='Confirm Password' />
             <button className='formBtns'>Sign Up</button>
           </div>
         )}
