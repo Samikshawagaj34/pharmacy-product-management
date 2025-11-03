@@ -6,27 +6,33 @@ import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 
 
+
 import Medicines from "./components/Cards/Medicines.jsx";
 
 //import AboutUs from "./pages/AboutUs.jsx";
+
+//import Products from "./pages/Products.jsx";
+import AboutUs from "./pages/AboutUs.jsx"; // ✅ Imported properly
+
 //import './App.css';
 
 
 function App() {
-  
-
   return (
     <BrowserRouter>
-
-    <MyNavbar />
-
-  
-    
-   
+      <MyNavbar />
 
 
     <Routes>
       <Route path="/" element={<Home/>}/>
+
+
+      <Route path="/AboutUs" element={<AboutUs />} />
+  
+
+      
+      <Route path="/SignUp" element={<Login />} />
+
       
       
       <Route path="/SignUp" element={<Login />} />
