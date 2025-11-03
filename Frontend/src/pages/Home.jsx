@@ -63,7 +63,10 @@ export default function Home(){
      
 
 
-      
+       <footer className="bg-success text-light text-center py-4 small">
+                © {new Date().getFullYear()} Mini Project — Pharmacy Product Management System by 
+                Vaishnavi Jagtap, Rugvedi Wankhade & Samiksha Wagaj.
+            </footer>
         </>
     );
 }
