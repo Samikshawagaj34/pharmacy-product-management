@@ -1,4 +1,4 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -39,4 +39,154 @@
 
 .read-the-docs {
   color: #888;
+} */
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #033452;
+;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.form-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(233, 218, 218, 0.1);
+  width: 300px;
+  height: auto  ;
+}
+
+.form-toggle {
+  display: flex;
+  justify-content:center;
+  margin-top: 20px;
+  margin-right: 2px;
+}
+.form-toggle button {
+  width: 50%;
+  padding: 10px;
+  background-color: #f3f3f3;
+  color: #033452;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 10px 10px 0 0;
+}
+
+.form-toggle .active {
+  background-color: #033452;
+  color: white;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.form h2 {
+  margin-bottom: 10px;
+  color: #033452;
+  text-align: left;
+  text-decoration: underline
+}
+
+.form input {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.form button {
+  padding: 10px;
+  background-color:#033452;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+ a {
+  color: #1fa2f3;
+  text-decoration: none;
+  text-align: right;
+  margin-inline-start: 150px;
+  font-size: 14px;
+  font-weight: lighter;
+  
+}
+
+.form p {
+  text-align: start;
+  font-size: 14px;
+  margin-top: 20px;
+  /* margin-inline-start: 40px; */
+  color: #033452;
+  display: flex-left;
+  justify-content:space-between ;
+  
+
+} 
+
+.form p a{
+  color:#1fa2f3;
+  text-decoration: none;
+  text-align: left;
+    font-size: 14px;
+    font-weight: lighter;
+  
+}
+
+
+.formBtns{
+  background-color: #033452;
+  color: white; 
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  height: 35px;
+  border: none;
+  cursor: pointer;
+  margin-top: 30px;
+  margin-right: 20px;
+  /* margin-bottom: 20px; */
+  width: 100%;
+  
+}
+.signup-form{
+  background: #f3f3f3;
+  color:#033452 ;
+  border-radius: 5px;
+  padding-top: 2px;
+  padding-left: 10px;
+  text-align: left;
+  text-decoration: underline;
+}
+
+input{
+  border-radius: 5px;
+  background-color: #f3f3f3;
+  color: #033452;
+  border :none;
+  border-bottom: 1px solid #033452;
+  width: 95%;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  height: 20px;
+  font-size: 16px;  
 }
