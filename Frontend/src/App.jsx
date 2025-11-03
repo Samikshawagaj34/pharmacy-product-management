@@ -1,15 +1,14 @@
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Drop from "./components/Cards/Drops.jsx";
-import Ointment from "./components/Cards/Ointments.jsx";
-import Syrup from "./components/Cards/Syrup.jsx";
-import Tablet from "./components/Cards/Tablet.jsx";
+
 import MyNavbar from "./components/Navbar/Navbar.jsx";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
-import Products from "./pages/Products.jsx";
 
-import AboutUs from "./pages/AboutUs.jsx";
+
+import Medicines from "./components/Cards/Medicines.jsx";
+
+//import AboutUs from "./pages/AboutUs.jsx";
 //import './App.css';
 
 
@@ -28,14 +27,13 @@ function App() {
 
     <Routes>
       <Route path="/" element={<Home/>}/>
-      <Route path="/AboutUs" element={<AboutUs />} />
-      <Route path="/products" element={<Products />} />
-      <Route path="/SignUp" element={<Login />} />
       
-      <Route path="/products/tablets" element={<Tablet />} />
-      <Route path="/products/creams" element={<Ointment />} />
-      <Route path="/products/syrups" element={<Syrup />} />
-      <Route path="/products/drops" element={<Drop />} />
+      
+      <Route path="/SignUp" element={<Login />} />
+
+      <Route path="/products/medicines" element={<Medicines />} />
+      
+     
     </Routes>
       </BrowserRouter>
   );
