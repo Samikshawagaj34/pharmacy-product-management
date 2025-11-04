@@ -12,6 +12,7 @@ import rugImg from '../assets/AboutUs/rug.jpeg';
 import vaishImg from '../assets/AboutUs/vaish.jpg';
 import samImg from '../assets/AboutUs/sam.jpg';
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 const teamData = [
@@ -22,6 +23,7 @@ const teamData = [
         role: 'Software Developer',
         bio: 'Builds Backend and Frontend.',
         img: vaishImg,// ✅ using imported image
+        linkedin: 'https://www.linkedin.com/in/vaishnavi-jagtap-267a67286', // 🔗 Replace with actual link
     },
     {
         id: 2,
@@ -29,6 +31,7 @@ const teamData = [
         role: 'Software Developer',
         bio: 'Builds Frontend and Backedn.',
         img: rugImg,
+        linkedin: 'https://www.linkedin.com/in/rugvedi-wankhede/', // 🔗 Replace with actual link
     },
     {
         id: 3,
@@ -36,7 +39,9 @@ const teamData = [
         role: 'Software Developer',
         bio: 'Builds Frontend and Backedn.',
         img: samImg,
+        linkedin: 'https://www.linkedin.com/in/samiksha-wagaj-343533302?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', // 🔗 Replace with actual link
     },
+
 ];
 
 export default function AboutUs() {
@@ -60,6 +65,7 @@ export default function AboutUs() {
                             </p>
                             <div className="mt-3">
                                 <button
+
                                     className="btn btn-success me-2"
                                     onClick={() => navigate("/contact")}
                                 >
@@ -126,8 +132,15 @@ export default function AboutUs() {
                         <p className="text-muted mb-0">A small, cross-functional group of makers, engineers and designers.</p>
                     </div>
                     <div>
-                        <button className="btn btn-sm btn-outline-success"
-                            onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}>Join us</button>
+
+                        <button
+                            className="btn btn-sm btn-outline-success"
+                            onClick={() => navigate("/login")}
+                        >
+                            Join us
+                        </button>
+
+
                     </div>
                 </div>
 
@@ -145,8 +158,27 @@ export default function AboutUs() {
                                             <p className="text-muted small mb-2">{member.role}</p>
                                             <p className="small text-muted mb-2">{member.bio}</p>
                                             <div>
-                                                <a href={`mailto:${member.name.replace(/ /g, '.').toLowerCase()}@example.com`} className="btn btn-sm btn-outline-secondary me-2">Email</a>
-                                                <a href="#" className="btn btn-sm btn-outline-secondary">LinkedIn</a>
+                                                <div>
+                                                    <a
+                                                        href={`https://mail.google.com/mail/?view=cm&fs=1&to=${member.name.replace(/ /g, '.').toLowerCase()}@example.com`}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="btn btn-sm btn-outline-secondary me-2"
+                                                    >
+                                                        Email
+                                                    </a>
+
+                                                    <a
+                                                        href={member.linkedin}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="btn btn-sm btn-outline-secondary"
+                                                    >
+                                                        LinkedIn
+                                                    </a>
+                                                </div>
+
+
                                             </div>
                                         </div>
                                     </div>

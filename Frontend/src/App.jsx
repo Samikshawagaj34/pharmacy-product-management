@@ -24,13 +24,16 @@ function App() {
 
       <Route path="/" element={<Home/>}/>
       <Route path="/AboutUs" element={<AboutUs />} />
-<Route path="/ContactUs" element={<ContactUs />} />
+
+        <Route path="/contact" element={<ContactUs />} />
 
 
       <Route path="/products" element={<Products />} />
       <Route path="/SignUp" element={<Login />} />
       
-      <Route path="/products/tablets" element={<Tablet />} />
+      <Route path="/login" element={<Login />} />
+
+       <Route path="/products/tablets" element={<Tablet />} />
       <Route path="/products/creams" element={<Ointment />} />
       <Route path="/products/syrup" element={<Syrup />} />
       <Route path="/products/drops" element={<Drop />} />
