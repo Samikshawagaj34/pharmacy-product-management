@@ -1,8 +1,9 @@
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Drop from "./components/Cards/Drops.jsx";
-import Ointment from "./components/Cards/Ointments.jsx";
+
+import Drop from "./components/Cards/Drop.jsx";
 import Syrup from "./components/Cards/Syrup.jsx";
+import Ointment from "./components/Cards/Ointment.jsx";
 import Tablet from "./components/Cards/Tablet.jsx";
 import MyNavbar from "./components/Navbar/Navbar.jsx";
 import Home from "./pages/Home.jsx";
@@ -10,26 +11,28 @@ import Login from "./pages/Login.jsx";
 import Products from "./pages/Products.jsx";
 import AboutUs from "./pages/AboutUs.jsx"; // ✅ Imported properly
 import ContactUs from "./pages/ContactUs.jsx"; // ✅ Correct path (assuming inside pages folder)
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 
+    
 function App() {
   return (
     <BrowserRouter>
       <MyNavbar />
 
-
     <Routes>
 
       <Route path="/" element={<Home/>}/>
       <Route path="/AboutUs" element={<AboutUs />} />
-        <Route path="/contact" element={<ContactUs />} /> {/* ✅ Fixed */}
+<Route path="/ContactUs" element={<ContactUs />} />
+
 
       <Route path="/products" element={<Products />} />
       <Route path="/SignUp" element={<Login />} />
       
       <Route path="/products/tablets" element={<Tablet />} />
       <Route path="/products/creams" element={<Ointment />} />
-      <Route path="/products/syrups" element={<Syrup />} />
+      <Route path="/products/syrup" element={<Syrup />} />
       <Route path="/products/drops" element={<Drop />} />
     </Routes>
       </BrowserRouter>
