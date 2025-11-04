@@ -1,0 +1,42 @@
+/* =============================
+   Navbar Hover Effect (Simple)
+   ============================= */
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar a {
+  position: relative;
+  text-decoration: none;
+  color: black; /* default text color */
+  font-weight: 500;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+}
+
+/* Underline animation */
+.navbar a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background-color: #00cc66; /* underline color (green) */
+  transition: width 0.3s ease;
+}
+
+/* Hover effects */
+.navbar a:hover {
+  color: #00cc66; /* text color change on hover */
+}
+
+.navbar a:hover::after {
+  width: 100%;
+}

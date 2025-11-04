@@ -9,7 +9,7 @@ import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Products from "./pages/Products.jsx";
 import AboutUs from "./pages/AboutUs.jsx"; // ✅ Imported properly
-//import './App.css';
+import ContactUs from "./pages/ContactUs.jsx"; // ✅ Correct path (assuming inside pages folder)
 
 
 function App() {
@@ -19,9 +19,10 @@ function App() {
 
 
     <Routes>
+
       <Route path="/" element={<Home/>}/>
       <Route path="/AboutUs" element={<AboutUs />} />
-  
+        <Route path="/contact" element={<ContactUs />} /> {/* ✅ Fixed */}
 
       <Route path="/products" element={<Products />} />
       <Route path="/SignUp" element={<Login />} />
