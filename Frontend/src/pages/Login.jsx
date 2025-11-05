@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../components/Footer/Footer'; // ✅ Import Footer
 import './Login.css';
 
 export default function Login() {
@@ -18,12 +19,10 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-  // ✅ Email and Password validation regex
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-  // 📨 Forgot Password handler (mock)
   const handleForgotPassword = (e) => {
     e.preventDefault();
     if (!email) {
@@ -43,7 +42,6 @@ export default function Login() {
     }, 1000);
   };
 
-  // ✅ SIGN-UP FUNCTIONALITY (Save to localStorage)
   const handleSignUp = (e) => {
     e.preventDefault();
     const { email, password, confirmPassword } = signupData;
@@ -86,7 +84,6 @@ export default function Login() {
     setIsLogin(true);
   };
 
-  // ✅ LOGIN FUNCTIONALITY (Check from localStorage)
   const handleLogin = (e) => {
     e.preventDefault();
     const { email, password } = loginData;
@@ -116,131 +113,139 @@ export default function Login() {
   };
 
   return (
-    <div className="login-page">
-      <div className="form-container">
-        {/* Toggle only if not on Forgot Password screen */}
-        {!isForgot && (
-          <div className="form-toggle">
-            <button
-              className={isLogin ? 'active' : ''}
-              onClick={() => {
-                setIsLogin(true);
-                setIsForgot(false);
-              }}
-            >
-              Login
-            </button>
-            <button
-              className={!isLogin ? 'active' : ''}
-              onClick={() => {
-                setIsLogin(false);
-                setIsForgot(false);
-              }}
-            >
-              Sign Up
-            </button>
-          </div>
-        )}
-
-        {/* FORGOT PASSWORD SCREEN */}
-        {isForgot ? (
-          <div className="form">
-            <h2>Forgot Password</h2>
-            <p className="text-muted" style={{ fontSize: '0.9rem' }}>
-              Enter your registered email address and we’ll send you a link to reset your password.
-            </p>
-            <form onSubmit={handleForgotPassword}>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <button type="submit" className="formBtn">Send Reset Link</button>
-            </form>
-            <p>
-              Remember your password?{' '}
-              <a href="#" onClick={() => setIsForgot(false)}>
-                Back to Login
-              </a>
-            </p>
-          </div>
-        ) : isLogin ? (
-          // ✅ LOGIN SCREEN
-          <div className="form">
-            <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-              <input
-                type="email"
-                placeholder="Email"
-                value={loginData.email}
-                onChange={(e) =>
-                  setLoginData({ ...loginData, email: e.target.value })
-                }
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                value={loginData.password}
-                onChange={(e) =>
-                  setLoginData({ ...loginData, password: e.target.value })
-                }
-              />
-              <a href="#" onClick={() => setIsForgot(true)}>
-                Forgot Password?
-              </a>
-              <button type="submit" className="formBtn">Login</button>
-            </form>
-            <p>
-              Not a member?{' '}
-              <a href="#" onClick={() => setIsLogin(false)}>
-                Sign up now
-              </a>
-            </p>
-          </div>
-        ) : (
-          // ✅ SIGNUP SCREEN
-          <div className="form">
-            <h2>Sign Up</h2>
-            <form onSubmit={handleSignUp}>
-              <input
-                type="email"
-                placeholder="Email"
-                value={signupData.email}
-                onChange={(e) =>
-                  setSignupData({ ...signupData, email: e.target.value })
-                }
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                value={signupData.password}
-                onChange={(e) =>
-                  setSignupData({ ...signupData, password: e.target.value })
-                }
-              />
-              <input
-                type="password"
-                placeholder="Confirm Password"
-                value={signupData.confirmPassword}
-                onChange={(e) =>
-                  setSignupData({
-                    ...signupData,
-                    confirmPassword: e.target.value,
-                  })
-                }
-              />
-              <button type="submit" className="formBtn">Sign Up</button>
-            </form>
-            <p>
-              Already have an account?{' '}
-              <a href="#" onClick={() => setIsLogin(true)}>
+    <>
+      {/* ✅ Main Login / Signup Section */}
+      <div className="login-page">
+        <div className="form-container">
+          {/* Toggle only if not on Forgot Password screen */}
+          {!isForgot && (
+            <div className="form-toggle">
+              <button
+                className={isLogin ? 'active' : ''}
+                onClick={() => {
+                  setIsLogin(true);
+                  setIsForgot(false);
+                }}
+              >
                 Login
-              </a>
-            </p>
-          </div>
-        )}
+              </button>
+              <button
+                className={!isLogin ? 'active' : ''}
+                onClick={() => {
+                  setIsLogin(false);
+                  setIsForgot(false);
+                }}
+              >
+                Sign Up
+              </button>
+            </div>
+          )}
+
+          {/* FORGOT PASSWORD SCREEN */}
+          {isForgot ? (
+            <div className="form">
+              <h2>Forgot Password</h2>
+              <p className="text-muted" style={{ fontSize: '0.9rem' }}>
+                Enter your registered email address and we’ll send you a link to reset your password.
+              </p>
+              <form onSubmit={handleForgotPassword}>
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <button type="submit" className="formBtn">Send Reset Link</button>
+              </form>
+              <p>
+                Remember your password?{' '}
+                <a href="#" onClick={() => setIsForgot(false)}>
+                  Back to Login
+                </a>
+              </p>
+            </div>
+          ) : isLogin ? (
+            // ✅ LOGIN SCREEN
+            <div className="form">
+              <h2>Login</h2>
+              <form onSubmit={handleLogin}>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={loginData.email}
+                  onChange={(e) =>
+                    setLoginData({ ...loginData, email: e.target.value })
+                  }
+                />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={loginData.password}
+                  onChange={(e) =>
+                    setLoginData({ ...loginData, password: e.target.value })
+                  }
+                />
+                <a href="#" onClick={() => setIsForgot(true)}>
+                  Forgot Password?
+                </a>
+                <button type="submit" className="formBtn">Login</button>
+              </form>
+              <p>
+                Not a member?{' '}
+                <a href="#" onClick={() => setIsLogin(false)}>
+                  Sign up now
+                </a>
+              </p>
+            </div>
+          ) : (
+            // ✅ SIGNUP SCREEN
+            <div className="form">
+              <h2>Sign Up</h2>
+              <form onSubmit={handleSignUp}>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={signupData.email}
+                  onChange={(e) =>
+                    setSignupData({ ...signupData, email: e.target.value })
+                  }
+                />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={signupData.password}
+                  onChange={(e) =>
+                    setSignupData({ ...signupData, password: e.target.value })
+                  }
+                />
+                <input
+                  type="password"
+                  placeholder="Confirm Password"
+                  value={signupData.confirmPassword}
+                  onChange={(e) =>
+                    setSignupData({
+                      ...signupData,
+                      confirmPassword: e.target.value,
+                    })
+                  }
+                />
+                <button type="submit" className="formBtn">Sign Up</button>
+              </form>
+              <p>
+                Already have an account?{' '}
+                <a href="#" onClick={() => setIsLogin(true)}>
+                  Login
+                </a>
+              </p>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+
+      {/* ✅ Full-width Footer (same style as AboutUs & ContactUs) */}
+      <div className="m-0 p-0 w-100" style={{ marginTop: 0 }}>
+        <Footer />
+      </div>
+    </>
   );
 }
