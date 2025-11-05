@@ -92,7 +92,7 @@ export default function Home(){
       className="d-flex flex-row overflow-auto py-2"
       style={{ gap: "10px", scrollbarWidth: "none" }}
     >
-          {/* Category 1 */}
+          
           
           <Col xs={6} sm={4} md={3} lg={2}>
             <Link to="/medicines" className="text-decoration-none text-dark">
@@ -109,7 +109,7 @@ export default function Home(){
             </Link>
           </Col>
 
-          {/* Category 2 */}
+          
           <Col xs={6} sm={4} md={3} lg={2}>
             <Link to="/personalcare" className="text-decoration-none text-dark">
               <div className="rounded-circle shadow-sm mx-auto "
@@ -125,7 +125,7 @@ export default function Home(){
             </Link>
           </Col>
 
-          {/* Category 3 */}
+          
           <Col xs={6} sm={4} md={3} lg={2}>
             <Link to="/vitamins" className="text-decoration-none text-dark">
               <div className="rounded-circle shadow-sm mx-auto "
@@ -142,7 +142,7 @@ export default function Home(){
           </Col>
 
            <Col xs={6} sm={4} md={3} lg={2}>
-            <Link to="/vitamins" className="text-decoration-none text-dark">
+            <Link to="/HealthCare" className="text-decoration-none text-dark">
               <div className="rounded-circle shadow-sm mx-auto "
                    style={{ width: "120px", height: "120px", overflow: "hidden" }}>
                 <img
@@ -156,23 +156,10 @@ export default function Home(){
             </Link>
           </Col>
 
-           <Col xs={6} sm={4} md={3} lg={2}>
-            <Link to="/vitamins" className="text-decoration-none text-dark">
-              <div className="rounded-circle shadow-sm mx-auto "
-                   style={{ width: "120px", height: "120px", overflow: "hidden" }}>
-                <img
-                  src={vitaminImg}
-                  alt="Vitamins"
-                  className="img-fluid"
-                  style={{ objectFit: "contain", width: "100%", height: "100%" }}
-                />
-              </div>
-              <p className="mt-2 fw-semibold">Vitamins</p>
-            </Link>
-          </Col>
+          
 
            <Col xs={6} sm={4} md={3} lg={2}>
-            <Link to="/vitamins" className="text-decoration-none text-dark">
+            <Link to="/Ayurveda" className="text-decoration-none text-dark">
               <div className="rounded-circle shadow-sm mx-auto "
                    style={{ width: "120px", height: "120px", overflow: "hidden" }}>
                 <img
@@ -186,38 +173,12 @@ export default function Home(){
             </Link>
           </Col>
 
-           <Col xs={6} sm={4} md={3} lg={2}>
-            <Link to="/vitamins" className="text-decoration-none text-dark">
-              <div className="rounded-circle shadow-sm mx-auto "
-                   style={{ width: "120px", height: "120px", overflow: "hidden" }}>
-                <img
-                  src={BabyCareImg}
-                  alt="Baby Care"
-                  className="img-fluid"
-                  style={{ objectFit: "contain", width: "100%", height: "100%" }}
-                />
-              </div>
-              <p className="mt-2 fw-semibold">Baby Care</p>
-            </Link>
-          </Col>
+           
+
+          
 
            <Col xs={6} sm={4} md={3} lg={2}>
-            <Link to="/vitamins" className="text-decoration-none text-dark">
-              <div className="rounded-circle shadow-sm mx-auto "
-                   style={{ width: "120px", height: "120px", overflow: "hidden" }}>
-                <img
-                  src={AyurvedicImg}
-                  alt="Ayurvedic"
-                  className="img-fluid"
-                  style={{ objectFit: "contain", width: "100%", height: "100%" }}
-                />
-              </div>
-              <p className="mt-2 fw-semibold">Featured</p>
-            </Link>
-          </Col>
-
-           <Col xs={6} sm={4} md={3} lg={2}>
-            <Link to="/vitamins" className="text-decoration-none text-dark">
+            <Link to="/covid" className="text-decoration-none text-dark">
               <div className="rounded-circle shadow-sm mx-auto "
                    style={{ width: "120px", height: "120px", overflow: "hidden" }}>
                 <img

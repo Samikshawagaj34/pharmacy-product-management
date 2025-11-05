@@ -1,54 +1,50 @@
+    
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 
-import { Card, Button, Container, Row, Col } from "react-bootstrap";
+import VitaminsBanner from "../../assets/Vitamins/VitaminsBanner1.jpg";
 
-import MedicineBanner from "../../assets/Medicines/Medicinesbanner1.jpg";
-
-import AddToCart from "../AddToCart.jsx";
-
-
-
-
-
-
-import GlycometImg from "../../assets/Medicines/Glycomet.jpg";
-import OptineuronImg from "../../assets/Medicines/Optineuron.jpg";
-import CalaptinImg from "../../assets/Medicines/Calaptin.jpg";
-import SysfolImg from "../../assets/Medicines/Sysfol.jpg";
-import OrangeImg from "../../assets/Medicines/Orange.jpg";
-import DailyshineImg from "../../assets/Medicines/Dailyshine.jpg";
-import NutrolinImg from "../../assets/Medicines/Nutrolin.jpg";
+import AppleImg from "../../assets/Vitamins/Applecider.jpg";
+import NutritioncImg from "../../assets/Vitamins/Nutritionvitaminc.jpg";
+import PureImg from "../../assets/Vitamins/PureNutrition.jpg";
+import PureDImg from "../../assets/Vitamins/PureNutritionDigestive.jpg";
+import PureIronImg from "../../assets/Vitamins/PureNutritionIron.jpg";
+import PapayaImg from "../../assets/Vitamins/PureNutritionPapaya.jpg";
+import VitaminDImg from "../../assets/Vitamins/PureNutritionvitamind.jpg";
+import ZincImg from "../../assets/Vitamins/PureNutritionZinc.jpg";
 
 
 
 
 
-const medicines = [
+
+
+const HealthCare = [
   {
-    img: GlycometImg,
-    name: "Glycomet Trio Forte 2 Tablet SR",
-    mrp: "₹222.50",
-    price: "₹200.25",
+    img: AppleImg,
+    name: "Savlon Germ Protection Wipes",
+    mrp: "₹70.50",
+    price: "₹43.25",
     offer: "10% off",
     stock: true,
   },
   {
-    img: OptineuronImg,
-    name: "Optineuron Forte Tablet",
-    mrp: "₹11.90",
-    price: "₹10.71",
-    offer: "10% off",
-    stock: false,
-  },
-  {
-    img: CalaptinImg,
-    name: "Calaptin 40 Tablet",
-    mrp: "₹28.90",
-    price: "₹26.00",
+    img: NutritioncImg,
+    name: "Just Human 24 Hour Protection Hand Sanitizer",
+    mrp: "₹70.90",
+    price: "₹60.60",
     offer: "10% off",
     stock: true,
   },
   {
-    img: SysfolImg,
+    img: PureImg,
+    name: "Savlon Mask",
+    mrp: "₹99.90",
+    price: "₹95.00",
+    offer: "10% off",
+    stock: true,
+  },
+  {
+    img: PureDImg,
     name: "Sysfol 5mg Tablet",
     mrp: "₹39.60",
     price: "₹35.64",
@@ -56,7 +52,7 @@ const medicines = [
     stock: true,
   },
    {
-    img: OrangeImg,
+    img: PureIronImg,
     name: "Sysfol 5mg Tablet",
     mrp: "₹39.60",
     price: "₹35.64",
@@ -64,7 +60,7 @@ const medicines = [
     stock: true,
   },
    {
-    img: DailyshineImg,
+    img: PapayaImg,
     name: "Sysfol 5mg Tablet",
     mrp: "₹39.60",
     price: "₹35.64",
@@ -72,7 +68,7 @@ const medicines = [
     stock: true,
   },
    {
-    img: NutrolinImg,
+    img: VitaminDImg,
     name: "Sysfol 5mg Tablet",
     mrp: "₹39.60",
     price: "₹35.64",
@@ -80,7 +76,7 @@ const medicines = [
     stock: true,
   },
    {
-    img: DailyshineImg,
+    img: ZincImg,
     name: "Sysfol 5mg Tablet",
     mrp: "₹39.60",
     price: "₹35.64",
@@ -89,16 +85,13 @@ const medicines = [
   },
 ];
 
-const MedicinesPage = () => {
-
-
-  
+const HealthCarePage = () => {
   return (
     <Container className="py-4">
       
       <div className="position-relative mb-4">
         <img
-          src={MedicineBanner}
+          src={VitaminsBanner}
           alt="Medicines Banner"
           className="w-100 rounded-3 shadow"
           style={{ height: "250px", objectFit: "cover" }}
@@ -110,13 +103,20 @@ const MedicinesPage = () => {
 
      
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h3 className="  fw-bold ">Medicines</h3>
-        
+        <h3 className="fw-bold">Healthcare Devices</h3>
+        <div>
+          <label className="me-2 fw-semibold">Sort By</label>
+          <select className="form-select d-inline w-auto">
+            <option>Relevance</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+          </select>
+        </div>
       </div>
 
      
       <Row className="gy-4">
-        {medicines.map((item, index) => (
+        {HealthCare.map((item, index) => (
           <Col key={index} xs={12} sm={6} md={4} lg={3}>
             <Card className="shadow-sm h-100">
               <Card.Img
@@ -137,7 +137,13 @@ const MedicinesPage = () => {
                   <span className="text-success fw-semibold">{item.offer}</span>
                 </p>
                 <p className="fw-bold">{item.price}</p>
-                <AddToCart product={medicines}/>
+                <Button
+                  variant={item.stock ? "success" : "secondary"}
+                  disabled={!item.stock}
+                  className="w-100"
+                >
+                  {item.stock ? "Add to Cart" : "Out of Stock"}
+                </Button>
               </Card.Body>
             </Card>
           </Col>
@@ -147,4 +153,4 @@ const MedicinesPage = () => {
   );
 };
 
-export default MedicinesPage;
+export default HealthCarePage;

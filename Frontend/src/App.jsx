@@ -1,84 +1,75 @@
-
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 
 import MyNavbar from "./components/Navbar/Navbar.jsx";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
-
-
+import Blog from "./pages/Blog.jsx";
 
 import Medicines from "./components/Cards/Medicines.jsx";
+import PersonalCare from "./components/Cards/PersonalCare.jsx";
+import CovidPage from "./components/Cards/Covid.jsx";
+import HealthCarePage from "./components/Cards/HealthCare.jsx";
+import Vitamins from "./components/Cards/Vitamins.jsx";
+import Ayurveda from "./components/Cards/Ayurveda.jsx";
+import AboutUs from "./pages/AboutUs.jsx";
 
-//import AboutUs from "./pages/AboutUs.jsx";
 
-//import Products from "./pages/Products.jsx";
-import AboutUs from "./pages/AboutUs.jsx"; // ✅ Imported properly
+import DashboardHome from "./pages/Admin/DashboardHome.jsx";
+import ManageProducts from "./pages/Admin/ManageProducts.jsx";
+import ManageOrders from "./pages/Admin/ManageOrders.jsx";
+import ManageUsers from "./pages/Admin/ManageUsers.jsx";
 
-//import './App.css';
 
+import AdminSidebar from "./components/AdminSidebar.jsx";
 
-function App() {
+function AppContent() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
+
   return (
-    <BrowserRouter>
-      <MyNavbar />
-
-
-    <Routes>
-      <Route path="/" element={<Home/>}/>
-
-
-      <Route path="/AboutUs" element={<AboutUs />} />
-  
-
-      
-      <Route path="/SignUp" element={<Login />} />
-
-      
-      
-      <Route path="/SignUp" element={<Login />} />
-
-      <Route path="/products/medicines" element={<Medicines />} />
-      
+    <>
      
-    </Routes>
-      </BrowserRouter>
+      {!isAdminRoute && <MyNavbar />}
+
+      <Routes>
+       
+        <Route path="/" element={<Home />} />
+        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/signup" element={<Login />} />
+        <Route path="/medicines" element={<Medicines />} />
+        <Route path="/personalcare" element={<PersonalCare />} />
+        <Route path="/vitamins" element={<Vitamins />} />
+        <Route path="/healthcare" element={<HealthCarePage />} />
+        <Route path="/ayurveda" element={<Ayurveda />} />
+        <Route path="/covid" element={<CovidPage />} />
+
+        
+        <Route
+          path="/admin/*"
+          element={
+            <div style={{ display: "flex" }}>
+              <AdminSidebar />
+              <div style={{ marginLeft: "220px", padding: "20px", width: "100%" }}>
+                <Routes>
+                  <Route path="dashboard" element={<DashboardHome />} />
+                  <Route path="products" element={<ManageProducts />} />
+                  <Route path="orders" element={<ManageOrders />} />
+                  <Route path="users" element={<ManageUsers />} />
+                </Routes>
+              </div>
+            </div>
+          }
+        />
+      </Routes>
+    </>
   );
 }
 
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-//import './App.css'
-//import Login from './pages/Login';
-//function App() {
-  // const [count, setCount] = useState(0)
-
-  //return (
-
-   // <div><Login/></div>
-    // <>
-    //   <div>
-    //     <a href="https://vite.dev" target="_blank">
-    //       <img src={viteLogo} className="logo" alt="Vite logo" />
-    //     </a>
-    //     <a href="https://react.dev" target="_blank">
-    //       <img src={reactLogo} className="logo react" alt="React logo" />
-    //     </a>
-    //   </div>
-    //   <h1>Vite + React</h1>
-    //   <div className="card">
-    //     <button onClick={() => setCount((count) => count + 1)}>
-    //       count is {count}
-    //     </button>
-    //     <p>
-    //       Edit <code>src/App.jsx</code> and save to test HMR
-    //     </p>
-    //   </div>
-    //   <p className="read-the-docs">
-    //     Click on the Vite and React logos to learn more
-    //   </p>
-    // </>
- // );
-//}
-
-export default App
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
+  );
+}
