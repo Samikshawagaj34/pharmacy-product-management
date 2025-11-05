@@ -86,8 +86,8 @@ export default function Login() {
       if (response.data.success) {
         alert(`✅ Welcome, ${response.data.user.name}!`);
         setLoginData({ emailOrPhone: '', password: '', role: 'customer' });
-        if (role === 'admin') navigate('/admin-dashboard');
-        else navigate('/');
+        if (role === 'admin') navigate('/admin');
+        else navigate('/Signup');
       } else {
         alert('❌ ' + response.data.message);
       }
