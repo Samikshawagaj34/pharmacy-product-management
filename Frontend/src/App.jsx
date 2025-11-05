@@ -1,9 +1,11 @@
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 
+
 import MyNavbar from "./components/Navbar/Navbar.jsx";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
-import Blog from "./pages/Blog.jsx";
+
+
 
 import Medicines from "./components/Cards/Medicines.jsx";
 import PersonalCare from "./components/Cards/PersonalCare.jsx";
@@ -35,7 +37,7 @@ function AppContent() {
        
         <Route path="/" element={<Home />} />
         <Route path="/aboutus" element={<AboutUs />} />
-        <Route path="/blog" element={<Blog />} />
+        
         <Route path="/signup" element={<Login />} />
         <Route path="/medicines" element={<Medicines />} />
         <Route path="/personalcare" element={<PersonalCare />} />
@@ -63,6 +65,8 @@ function AppContent() {
         />
       </Routes>
     </>
+
+
   );
 }
 
