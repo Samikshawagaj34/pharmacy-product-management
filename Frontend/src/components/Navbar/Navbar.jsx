@@ -24,7 +24,7 @@ export default function MyNavbar() {
               <Nav.Link as={Link} to="/">Home</Nav.Link>
               <Nav.Link as={Link} to="/AboutUs">About Us</Nav.Link>
               <Nav.Link as={Link} to="/Products">Products</Nav.Link>
-<Nav.Link as={Link} to="/contact">Contact Us</Nav.Link>
+              <Nav.Link as={Link} to="/contact">Contact Us</Nav.Link>
               <Nav.Link as={Link} to="/SignUp">Login</Nav.Link>
             </Nav>
           </Navbar.Collapse>
