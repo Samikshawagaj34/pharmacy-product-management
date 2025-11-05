@@ -1,251 +1,256 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Footer from '../components/Footer/Footer'; // ✅ Import Footer
-import './Login.css';
+import axios from 'axios';
+import Footer from '../components/Footer/Footer';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
-  const [isForgot, setIsForgot] = useState(false);
-  const [email, setEmail] = useState('');
   const [signupData, setSignupData] = useState({
+    name: '',
+    phone: '',
     email: '',
     password: '',
-    confirmPassword: '',
+    address: '',
+    role: 'customer',
   });
   const [loginData, setLoginData] = useState({
-    email: '',
+    emailOrPhone: '',
     password: '',
+    role: 'customer',
   });
 
   const navigate = useNavigate();
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^[0-9]{10}$/;
   const passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-  const handleForgotPassword = (e) => {
+  // ----------------- SIGNUP -----------------
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    if (!email) {
-      alert('⚠️ Please enter your email address.');
-      return;
-    }
+    const { name, phone, email, password, address, role } = signupData;
 
-    if (!emailRegex.test(email)) {
-      alert('⚠️ Please enter a valid email address.');
-      return;
-    }
-
-    setTimeout(() => {
-      alert(`📧 Password reset link has been sent to ${email}`);
-      setEmail('');
-      setIsForgot(false);
-    }, 1000);
-  };
-
-  const handleSignUp = (e) => {
-    e.preventDefault();
-    const { email, password, confirmPassword } = signupData;
-
-    if (!email || !password || !confirmPassword) {
+    if (!name || !phone || !email || !password || !address) {
       alert('⚠️ Please fill in all fields.');
       return;
     }
 
     if (!emailRegex.test(email)) {
-      alert('⚠️ Please enter a valid email address.');
+      alert('⚠️ Enter a valid email.');
+      return;
+    }
+
+    if (!phoneRegex.test(phone)) {
+      alert('⚠️ Enter a valid 10-digit phone number.');
       return;
     }
 
     if (!passwordRegex.test(password)) {
       alert(
-        '⚠️ Password must be at least 8 characters long, include uppercase, lowercase, number, and special character.'
+        '⚠️ Password must be at least 8 characters, include uppercase, lowercase, number & special character.'
       );
       return;
     }
 
-    if (password !== confirmPassword) {
-      alert('⚠️ Passwords do not match.');
-      return;
+    try {
+      const response = await axios.post('http://localhost:5000/api/signup', signupData);
+      if (response.data.success) {
+        alert('✅ Signed up successfully! You can now login.');
+        setSignupData({ name: '', phone: '', email: '', password: '', address: '', role: 'customer' });
+        setIsLogin(true);
+      } else {
+        alert('⚠️ ' + response.data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      alert('❌ Something went wrong during signup.');
     }
-
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const userExists = users.find((u) => u.email === email);
-
-    if (userExists) {
-      alert('⚠️ An account with this email already exists.');
-      return;
-    }
-
-    users.push({ email, password });
-    localStorage.setItem('users', JSON.stringify(users));
-
-    alert('✅ Signed up successfully! You can now log in.');
-    setSignupData({ email: '', password: '', confirmPassword: '' });
-    setIsLogin(true);
   };
 
-  const handleLogin = (e) => {
+  // ----------------- LOGIN -----------------
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const { email, password } = loginData;
+    const emailOrPhone = loginData.emailOrPhone.trim();
+    const password = loginData.password.trim();
+    const role = loginData.role;
 
-    if (!email || !password) {
-      alert('⚠️ Please enter both email and password.');
+    if (!emailOrPhone || !password) {
+      alert('⚠️ Enter both credentials.');
       return;
     }
 
-    if (!emailRegex.test(email)) {
-      alert('⚠️ Please enter a valid email address.');
-      return;
-    }
-
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const validUser = users.find(
-      (u) => u.email === email && u.password === password
-    );
-
-    if (validUser) {
-      alert(`✅ Welcome back, ${email}!`);
-      setLoginData({ email: '', password: '' });
-      navigate('/');
-    } else {
-      alert('❌ Invalid credentials. Please try again.');
+    try {
+      const response = await axios.post('http://localhost:5000/api/login', { emailOrPhone, password, role });
+      if (response.data.success) {
+        alert(`✅ Welcome, ${response.data.user.name}!`);
+        setLoginData({ emailOrPhone: '', password: '', role: 'customer' });
+        if (role === 'admin') navigate('/admin-dashboard');
+        else navigate('/');
+      } else {
+        alert('❌ ' + response.data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      alert('❌ Something went wrong during login.');
     }
   };
 
   return (
     <>
-      {/* ✅ Main Login / Signup Section */}
-      <div className="login-page">
-        <div className="form-container">
-          {/* Toggle only if not on Forgot Password screen */}
-          {!isForgot && (
-            <div className="form-toggle">
-              <button
-                className={isLogin ? 'active' : ''}
-                onClick={() => {
-                  setIsLogin(true);
-                  setIsForgot(false);
-                }}
-              >
-                Login
-              </button>
-              <button
-                className={!isLogin ? 'active' : ''}
-                onClick={() => {
-                  setIsLogin(false);
-                  setIsForgot(false);
-                }}
-              >
-                Sign Up
-              </button>
-            </div>
-          )}
+      <div className="container my-5">
+        <div className="row justify-content-center">
+          <div className="col-md-6">
+            <div className="card shadow">
+              <div className="card-body p-4">
+                <div className="mb-3 text-center">
+                  <button
+                    className={`btn btn-outline-success me-2 ${isLogin ? 'active' : ''}`}
+                    onClick={() => setIsLogin(true)}
+                  >
+                    Login
+                  </button>
+                  <button
+                    className={`btn btn-outline-success ${!isLogin ? 'active' : ''}`}
+                    onClick={() => setIsLogin(false)}
+                  >
+                    Regiter
+                  </button>
+                </div>
 
-          {/* FORGOT PASSWORD SCREEN */}
-          {isForgot ? (
-            <div className="form">
-              <h2>Forgot Password</h2>
-              <p className="text-muted" style={{ fontSize: '0.9rem' }}>
-                Enter your registered email address and we’ll send you a link to reset your password.
-              </p>
-              <form onSubmit={handleForgotPassword}>
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <button type="submit" className="formBtn">Send Reset Link</button>
-              </form>
-              <p>
-                Remember your password?{' '}
-                <a href="#" onClick={() => setIsForgot(false)}>
-                  Back to Login
-                </a>
-              </p>
+                {/* ----------------- LOGIN FORM ----------------- */}
+                {isLogin ? (
+                  <div>
+                    <h3 className="text-center mb-4">Login</h3>
+                    <form onSubmit={handleLogin}>
+                      <div className="mb-3">
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Email or Phone"
+                          value={loginData.emailOrPhone}
+                          onChange={(e) =>
+                            setLoginData({ ...loginData, emailOrPhone: e.target.value })
+                          }
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <input
+                          type="password"
+                          className="form-control"
+                          placeholder="Password"
+                          value={loginData.password}
+                          onChange={(e) =>
+                            setLoginData({ ...loginData, password: e.target.value })
+                          }
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <select
+                          className="form-select"
+                          value={loginData.role}
+                          onChange={(e) =>
+                            setLoginData({ ...loginData, role: e.target.value })
+                          }
+                        >
+                          <option value="customer">Customer</option>
+                          <option value="admin">Admin</option>
+                        </select>
+                      </div>
+                      <div className="d-grid mb-3">
+                        <button type="submit" className="btn btn-success">
+                          Login
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                ) : (
+                  /* ----------------- SIGNUP FORM ----------------- */
+                  <div>
+                    <h3 className="text-center mb-4">Sign Up</h3>
+                    <form onSubmit={handleSignUp}>
+                      <div className="mb-3">
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Full Name"
+                          value={signupData.name}
+                          onChange={(e) =>
+                            setSignupData({ ...signupData, name: e.target.value })
+                          }
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Phone Number"
+                          value={signupData.phone}
+                          onChange={(e) =>
+                            setSignupData({ ...signupData, phone: e.target.value })
+                          }
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <input
+                          type="email"
+                          className="form-control"
+                          placeholder="Email"
+                          value={signupData.email}
+                          onChange={(e) =>
+                            setSignupData({ ...signupData, email: e.target.value })
+                          }
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <input
+                          type="password"
+                          className="form-control"
+                          placeholder="Password"
+                          value={signupData.password}
+                          onChange={(e) =>
+                            setSignupData({ ...signupData, password: e.target.value })
+                          }
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Address"
+                          value={signupData.address}
+                          onChange={(e) =>
+                            setSignupData({ ...signupData, address: e.target.value })
+                          }
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <select
+                          className="form-select"
+                          value={signupData.role}
+                          onChange={(e) =>
+                            setSignupData({ ...signupData, role: e.target.value })
+                          }
+                        >
+                          <option value="customer">Customer</option>
+                          <option value="admin">Admin</option>
+                        </select>
+                      </div>
+                      <div className="d-grid mb-3">
+                        <button type="submit" className="btn btn-success">
+                          Register
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                )}
+              </div>
             </div>
-          ) : isLogin ? (
-            // ✅ LOGIN SCREEN
-            <div className="form">
-              <h2>Login</h2>
-              <form onSubmit={handleLogin}>
-                <input
-                  type="email"
-                  placeholder="Email"
-                  value={loginData.email}
-                  onChange={(e) =>
-                    setLoginData({ ...loginData, email: e.target.value })
-                  }
-                />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  value={loginData.password}
-                  onChange={(e) =>
-                    setLoginData({ ...loginData, password: e.target.value })
-                  }
-                />
-                <a href="#" onClick={() => setIsForgot(true)}>
-                  Forgot Password?
-                </a>
-                <button type="submit" className="formBtn">Login</button>
-              </form>
-              <p>
-                Not a member?{' '}
-                <a href="#" onClick={() => setIsLogin(false)}>
-                  Sign up now
-                </a>
-              </p>
-            </div>
-          ) : (
-            // ✅ SIGNUP SCREEN
-            <div className="form">
-              <h2>Sign Up</h2>
-              <form onSubmit={handleSignUp}>
-                <input
-                  type="email"
-                  placeholder="Email"
-                  value={signupData.email}
-                  onChange={(e) =>
-                    setSignupData({ ...signupData, email: e.target.value })
-                  }
-                />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  value={signupData.password}
-                  onChange={(e) =>
-                    setSignupData({ ...signupData, password: e.target.value })
-                  }
-                />
-                <input
-                  type="password"
-                  placeholder="Confirm Password"
-                  value={signupData.confirmPassword}
-                  onChange={(e) =>
-                    setSignupData({
-                      ...signupData,
-                      confirmPassword: e.target.value,
-                    })
-                  }
-                />
-                <button type="submit" className="formBtn">Sign Up</button>
-              </form>
-              <p>
-                Already have an account?{' '}
-                <a href="#" onClick={() => setIsLogin(true)}>
-                  Login
-                </a>
-              </p>
-            </div>
-          )}
+          </div>
         </div>
       </div>
-
-      {/* ✅ Full-width Footer (same style as AboutUs & ContactUs) */}
-      <div className="m-0 p-0 w-100" style={{ marginTop: 0 }}>
-        <Footer />
-      </div>
+      <Footer />
     </>
   );
 }

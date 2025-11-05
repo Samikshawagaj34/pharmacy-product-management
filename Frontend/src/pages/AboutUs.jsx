@@ -134,7 +134,7 @@ export default function AboutUs() {
             <div>
               <button
                 className="btn btn-sm btn-outline-success"
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/Signup")}
               >
                 Join us
               </button>
@@ -178,51 +178,7 @@ export default function AboutUs() {
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section className="py-5 bg-light">
-          <Container>
-            <h3 className="text-center mb-4 text-success fw-bold">
-              Frequently Asked Questions❓
-            </h3>
-
-            <Accordion defaultActiveKey="0" className="mx-auto" style={{ maxWidth: "800px" }}>
-              <Accordion.Item eventKey="0">
-                <Accordion.Header>How long does delivery take?</Accordion.Header>
-                <Accordion.Body>
-                  We usually deliver within <strong>2–5 business days</strong>, depending on your location and product availability.
-                </Accordion.Body>
-              </Accordion.Item>
-
-              <Accordion.Item eventKey="1">
-                <Accordion.Header>Are all medicines genuine?</Accordion.Header>
-                <Accordion.Body>
-                  Yes ✅, we only sell <strong>100% authentic and government-approved medicines</strong> from trusted suppliers.
-                </Accordion.Body>
-              </Accordion.Item>
-
-              <Accordion.Item eventKey="2">
-                <Accordion.Header>Do you offer free shipping?</Accordion.Header>
-                <Accordion.Body>
-                  Yes! 🚚 Free shipping is available on <strong>prepaid orders over ₹499</strong>.
-                </Accordion.Body>
-              </Accordion.Item>
-
-              <Accordion.Item eventKey="3">
-                <Accordion.Header>Can I return or exchange a product?</Accordion.Header>
-                <Accordion.Body>
-                  Products can be returned or replaced if they are <strong>damaged, expired, or incorrect</strong> within 7 days of delivery.
-                </Accordion.Body>
-              </Accordion.Item>
-
-              <Accordion.Item eventKey="4">
-                <Accordion.Header>How can I contact customer support?</Accordion.Header>
-                <Accordion.Body>
-                  You can reach our support team 24x7 via <strong>email</strong> or <strong>WhatsApp chat</strong> from the Contact Us page.
-                </Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
-          </Container>
-        </section>
+       
       </div>
 
       {/* ✅ Full-width footer (no side margins) */}

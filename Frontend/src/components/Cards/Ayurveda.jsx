@@ -102,15 +102,8 @@ const HealthCarePage = () => {
 
      
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h3 className="fw-bold">Healthcare Devices</h3>
-        <div>
-          <label className="me-2 fw-semibold">Sort By</label>
-          <select className="form-select d-inline w-auto">
-            <option>Relevance</option>
-            <option>Price: Low to High</option>
-            <option>Price: High to Low</option>
-          </select>
-        </div>
+        <h3 className="fw-bold">Ayurveda</h3>
+        
       </div>
 
      
